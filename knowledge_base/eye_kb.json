@@ -1,0 +1,146 @@
+{
+  "metadata": {
+    "domain": "eye",
+    "guideline_version": "illustrative-v2",
+    "guideline_source": "Hand-curated from general ophthalmology triage patterns (red-eye differential, vision-loss differential) — paraphrased, general medical knowledge, not a transcription of any single named guideline",
+    "publication_date": "2026-07-06",
+    "retrieval_timestamp": "2026-07-06T00:00:00Z",
+    "document_source": "curated-for-prototype",
+    "note": "Expanded from 5 to 13 illustrative diseases for a course prototype — broader coverage of the common red-eye and vision-change differentials, but still hand-curated general medical knowledge, NOT a licensed/versioned clinical guideline. Replace with a real source (e.g. a licensed AAO PPP feed) before any real-world use. The fabricated-looking guideline_version string is intentional — it demonstrates the versioning field the architecture calls for without falsely claiming a specific real citation."
+  },
+  "diseases": [
+    {
+      "name": "conjunctivitis",
+      "department": "Ophthalmology",
+      "required_symptoms": ["eye_redness"],
+      "supporting_symptoms": ["eye_discharge", "itching", "eye_pain"],
+      "contraindicating_symptoms": ["vision_loss_sudden", "severe_eye_pain"],
+      "base_rate": 0.30,
+      "red_flag": false
+    },
+    {
+      "name": "allergic_conjunctivitis",
+      "department": "Ophthalmology",
+      "required_symptoms": ["itching", "eye_redness"],
+      "supporting_symptoms": ["tearing", "eye_discharge"],
+      "contraindicating_symptoms": ["severe_eye_pain", "vision_loss_sudden"],
+      "base_rate": 0.15,
+      "red_flag": false,
+      "note": "Deliberately overlaps heavily with conjunctivitis — differentiating them (e.g. seasonal pattern, bilateral onset) is exactly the kind of thin-margin case the Planner/Confidence Engine should keep asking about rather than guessing."
+    },
+    {
+      "name": "dry_eye_syndrome",
+      "department": "Ophthalmology",
+      "required_symptoms": ["eye_dryness"],
+      "supporting_symptoms": ["eye_irritation", "blurred_vision"],
+      "contraindicating_symptoms": ["eye_discharge_purulent"],
+      "base_rate": 0.20,
+      "red_flag": false
+    },
+    {
+      "name": "blepharitis",
+      "department": "Ophthalmology",
+      "required_symptoms": ["eyelid_crusting"],
+      "supporting_symptoms": ["eye_irritation", "itching", "gritty_sensation", "eye_redness"],
+      "contraindicating_symptoms": ["severe_eye_pain", "vision_loss_sudden"],
+      "base_rate": 0.12,
+      "red_flag": false
+    },
+    {
+      "name": "chalazion_stye",
+      "department": "Ophthalmology",
+      "required_symptoms": ["eyelid_lump"],
+      "supporting_symptoms": ["eyelid_swelling"],
+      "contraindicating_symptoms": ["vision_loss_sudden", "severe_eye_pain"],
+      "base_rate": 0.10,
+      "red_flag": false
+    },
+    {
+      "name": "subconjunctival_hemorrhage",
+      "department": "Ophthalmology",
+      "required_symptoms": ["eye_redness"],
+      "supporting_symptoms": [],
+      "contraindicating_symptoms": ["eye_pain", "severe_eye_pain", "blurred_vision", "vision_loss_sudden", "eye_discharge"],
+      "base_rate": 0.06,
+      "red_flag": false,
+      "note": "Classic 'painless red eye' — modeled entirely through contraindications rather than positive supporting symptoms, since the defining feature is the ABSENCE of pain/discharge/vision change alongside redness."
+    },
+    {
+      "name": "corneal_abrasion",
+      "department": "Ophthalmology",
+      "required_symptoms": ["eye_pain"],
+      "supporting_symptoms": ["foreign_body_sensation", "tearing", "light_sensitivity"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.15,
+      "red_flag": false
+    },
+    {
+      "name": "cataract",
+      "department": "Ophthalmology",
+      "required_symptoms": ["vision_loss_gradual"],
+      "supporting_symptoms": ["glare_sensitivity", "blurred_vision"],
+      "contraindicating_symptoms": ["eye_pain", "eye_redness", "vision_loss_sudden"],
+      "base_rate": 0.08,
+      "red_flag": false
+    },
+    {
+      "name": "keratitis",
+      "department": "Ophthalmology (Emergency)",
+      "required_symptoms": ["eye_pain", "light_sensitivity"],
+      "supporting_symptoms": ["contact_lens_use", "eye_discharge", "blurred_vision", "foreign_body_sensation"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.02,
+      "red_flag": true,
+      "red_flag_reason": "risk of corneal scarring/vision loss if untreated, especially contact-lens-associated"
+    },
+    {
+      "name": "uveitis",
+      "department": "Ophthalmology (Emergency)",
+      "required_symptoms": ["eye_pain", "light_sensitivity", "blurred_vision"],
+      "supporting_symptoms": ["eye_redness"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.015,
+      "red_flag": true,
+      "red_flag_reason": "sight-threatening inflammation; needs prompt ophthalmology assessment"
+    },
+    {
+      "name": "scleritis",
+      "department": "Ophthalmology (Emergency)",
+      "required_symptoms": ["severe_eye_pain", "eye_redness"],
+      "supporting_symptoms": ["light_sensitivity", "tearing"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.01,
+      "red_flag": true,
+      "red_flag_reason": "vision-threatening; often needs urgent ophthalmology and systemic workup"
+    },
+    {
+      "name": "acute_angle_closure_glaucoma",
+      "department": "Ophthalmology (Emergency)",
+      "required_symptoms": ["severe_eye_pain", "blurred_vision"],
+      "supporting_symptoms": ["nausea", "halos_around_lights", "eye_redness"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.03,
+      "red_flag": true,
+      "red_flag_reason": "sight- and time-critical; requires immediate care"
+    },
+    {
+      "name": "retinal_detachment",
+      "department": "Ophthalmology (Emergency)",
+      "required_symptoms": ["vision_loss_sudden"],
+      "supporting_symptoms": ["floaters", "flashes_of_light", "curtain_shadow_vision"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.02,
+      "red_flag": true,
+      "red_flag_reason": "time-critical risk of permanent vision loss"
+    }
+  ],
+  "symptom_vocabulary": [
+    "eye_redness", "eye_pain", "severe_eye_pain", "eye_discharge", "eye_discharge_purulent",
+    "itching", "eye_dryness", "eye_irritation", "blurred_vision", "vision_loss_sudden",
+    "vision_loss_gradual", "nausea", "halos_around_lights", "foreign_body_sensation", "tearing",
+    "light_sensitivity", "floaters", "flashes_of_light", "curtain_shadow_vision",
+    "eyelid_crusting", "gritty_sensation", "eyelid_lump", "eyelid_swelling",
+    "contact_lens_use", "glare_sensitivity"
+  ]
+}
+

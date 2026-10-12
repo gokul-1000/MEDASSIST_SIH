@@ -1,0 +1,12 @@
+.env
+__pycache__/*.py[cod]
+test/
+tests/
+workflow.py
+graph.png
+venv
+__pycache__/
+*.pyc
+checkpoints.sqlite
+checkpoints.sqlite-shm
+checkpoints.sqlite-wal

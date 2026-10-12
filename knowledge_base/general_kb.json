@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "domain": "general",
+    "guideline_version": "illustrative-v2",
+    "guideline_source": "Hand-curated from general primary-care/ED triage patterns (Centor criteria for pharyngitis, classic renal colic/UTI differential, chest-pain safety-netting) — paraphrased, general medical knowledge, not a transcription of any single named guideline",
+    "publication_date": "2026-07-06",
+    "retrieval_timestamp": "2026-07-06T00:00:00Z",
+    "document_source": "curated-for-prototype",
+    "note": "Expanded from 7 to 17 illustrative diseases for a course prototype — broader coverage of common primary-care and can't-miss ED presentations, but still hand-curated general medical knowledge, NOT a licensed/versioned clinical guideline. Replace with a real source before any real-world use. The fabricated-looking guideline_version string is intentional — it demonstrates the versioning field the architecture calls for without falsely claiming a specific real citation."
+  },
+  "diseases": [
+    {
+      "name": "common_cold",
+      "department": "General Medicine",
+      "required_symptoms": ["runny_nose"],
+      "supporting_symptoms": ["sore_throat", "cough", "sneezing"],
+      "contraindicating_symptoms": ["chest_pain", "shortness_of_breath"],
+      "base_rate": 0.22,
+      "red_flag": false
+    },
+    {
+      "name": "influenza",
+      "department": "General Medicine",
+      "required_symptoms": ["fever", "body_ache"],
+      "supporting_symptoms": ["cough", "fatigue", "headache", "chills"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.12,
+      "red_flag": false
+    },
+    {
+      "name": "sinusitis",
+      "department": "General Medicine",
+      "required_symptoms": ["facial_pain_pressure", "nasal_congestion"],
+      "supporting_symptoms": ["purulent_nasal_discharge", "fever", "reduced_smell"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.08,
+      "red_flag": false
+    },
+    {
+      "name": "pharyngitis",
+      "department": "General Medicine",
+      "required_symptoms": ["sore_throat", "fever"],
+      "supporting_symptoms": ["swollen_lymph_nodes"],
+      "contraindicating_symptoms": ["cough"],
+      "base_rate": 0.07,
+      "red_flag": false,
+      "note": "Loosely modeled on Centor criteria — absence of cough is itself a positive signal toward strep-pattern pharyngitis, hence 'cough' as contraindicating rather than merely absent-from-supporting."
+    },
+    {
+      "name": "tension_headache",
+      "department": "Neurology",
+      "required_symptoms": ["headache"],
+      "supporting_symptoms": ["neck_tightness", "stress"],
+      "contraindicating_symptoms": ["sudden_worst_headache_of_life", "neurological_deficit", "visual_aura"],
+      "base_rate": 0.15,
+      "red_flag": false
+    },
+    {
+      "name": "migraine",
+      "department": "Neurology",
+      "required_symptoms": ["headache"],
+      "supporting_symptoms": ["nausea", "light_sensitivity", "visual_aura", "throbbing_pain"],
+      "contraindicating_symptoms": ["sudden_worst_headache_of_life", "neurological_deficit"],
+      "base_rate": 0.10,
+      "red_flag": false,
+      "note": "Deliberately overlaps with tension_headache on the same required symptom — the supporting/contraindicating sets are what should separate them, which is exactly the kind of gap the Planner should target."
+    },
+    {
+      "name": "gastroenteritis",
+      "department": "General Medicine",
+      "required_symptoms": ["diarrhea"],
+      "supporting_symptoms": ["vomiting", "abdominal_pain", "mild_fever", "nausea"],
+      "contraindicating_symptoms": ["blood_in_stool", "severe_dehydration"],
+      "base_rate": 0.10,
+      "red_flag": false
+    },
+    {
+      "name": "gerd",
+      "department": "General Medicine",
+      "required_symptoms": ["heartburn"],
+      "supporting_symptoms": ["regurgitation"],
+      "contraindicating_symptoms": ["chest_pain", "shortness_of_breath"],
+      "base_rate": 0.08,
+      "red_flag": false,
+      "note": "Chest discomfort from reflux is a classic cardiac mimic — contraindicating on true chest_pain/shortness_of_breath keeps this from ever outscoring the ACS/PE/panic-attack cluster below, which is the clinically correct default when the two are hard to tell apart from symptoms alone."
+    },
+    {
+      "name": "urinary_tract_infection",
+      "department": "General Medicine",
+      "required_symptoms": ["dysuria"],
+      "supporting_symptoms": ["urinary_frequency", "urinary_urgency"],
+      "contraindicating_symptoms": ["flank_pain", "fever"],
+      "base_rate": 0.06,
+      "red_flag": false
+    },
+    {
+      "name": "kidney_stone",
+      "department": "Urology",
+      "required_symptoms": ["flank_pain"],
+      "supporting_symptoms": ["hematuria", "nausea", "radiating_groin_pain"],
+      "contraindicating_symptoms": ["fever"],
+      "base_rate": 0.02,
+      "red_flag": false
+    },
+    {
+      "name": "pyelonephritis",
+      "department": "Urology (Emergency)",
+      "required_symptoms": ["dysuria", "flank_pain", "fever"],
+      "supporting_symptoms": ["nausea", "vomiting"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.01,
+      "red_flag": true,
+      "red_flag_reason": "risk of urosepsis if untreated — the escalated variant of a UTI/kidney-stone-pattern presentation"
+    },
+    {
+      "name": "appendicitis",
+      "department": "General Surgery (Emergency)",
+      "required_symptoms": ["abdominal_pain"],
+      "supporting_symptoms": ["fever", "nausea", "vomiting", "right_lower_quadrant_pain"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.02,
+      "red_flag": true,
+      "red_flag_reason": "risk of perforation if delayed"
+    },
+    {
+      "name": "acute_coronary_syndrome",
+      "department": "Cardiology (Emergency)",
+      "required_symptoms": ["chest_pain"],
+      "supporting_symptoms": ["shortness_of_breath", "sweating", "left_arm_pain", "nausea"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.02,
+      "red_flag": true,
+      "red_flag_reason": "chest pain + breathlessness is a hard emergency short-circuit (architecture doc §9)"
+    },
+    {
+      "name": "pulmonary_embolism",
+      "department": "Emergency Medicine (Emergency)",
+      "required_symptoms": ["chest_pain", "shortness_of_breath"],
+      "supporting_symptoms": ["leg_swelling", "rapid_heart_rate"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.01,
+      "red_flag": true,
+      "red_flag_reason": "life-threatening and cannot be distinguished from ACS by symptoms alone — shares the hard chest_pain+shortness_of_breath short-circuit by design"
+    },
+    {
+      "name": "anxiety_panic_attack",
+      "department": "Emergency Medicine (Emergency)",
+      "required_symptoms": ["chest_pain", "shortness_of_breath"],
+      "supporting_symptoms": ["sweating", "dizziness", "sense_of_impending_doom"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.03,
+      "red_flag": false,
+      "note": "Intentionally shares its required symptoms with acute_coronary_syndrome and pulmonary_embolism. This candidate is NOT individually marked red_flag, but the hard chest_pain+shortness_of_breath rule-engine combination (rules/rule_engine.py) fires regardless of which of the three wins — a real self-assessment tool should never let 'probably just anxiety' suppress an emergency-level response to this symptom pattern, and this KB entry exists specifically to prove that design holds."
+    },
+    {
+      "name": "allergic_reaction_anaphylaxis",
+      "department": "Emergency Medicine (Emergency)",
+      "required_symptoms": ["hives_or_rash", "shortness_of_breath"],
+      "supporting_symptoms": ["facial_swelling", "dizziness"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.005,
+      "red_flag": true,
+      "red_flag_reason": "anaphylaxis can be fatal within minutes"
+    },
+    {
+      "name": "stroke",
+      "department": "Neurology (Emergency)",
+      "required_symptoms": ["neurological_deficit"],
+      "supporting_symptoms": ["facial_droop", "slurred_speech", "arm_weakness", "sudden_worst_headache_of_life"],
+      "contraindicating_symptoms": [],
+      "base_rate": 0.01,
+      "red_flag": true,
+      "red_flag_reason": "stroke-pattern symptoms short-circuit straight to Level 3 (architecture doc §9)"
+    }
+  ],
+  "symptom_vocabulary": [
+    "runny_nose", "sore_throat", "cough", "mild_fever", "fever", "sneezing", "body_ache",
+    "fatigue", "headache", "chills", "nausea", "light_sensitivity", "visual_aura",
+    "throbbing_pain", "sudden_worst_headache_of_life", "neurological_deficit", "diarrhea",
+    "vomiting", "abdominal_pain", "blood_in_stool", "severe_dehydration", "chest_pain",
+    "shortness_of_breath", "sweating", "left_arm_pain", "right_lower_quadrant_pain",
+    "facial_droop", "slurred_speech", "arm_weakness", "facial_pain_pressure", "nasal_congestion",
+    "purulent_nasal_discharge", "reduced_smell", "swollen_lymph_nodes", "neck_tightness", "stress",
+    "heartburn", "regurgitation", "dysuria", "urinary_frequency", "urinary_urgency", "flank_pain",
+    "hematuria", "radiating_groin_pain", "leg_swelling", "rapid_heart_rate", "dizziness",
+    "sense_of_impending_doom", "hives_or_rash", "facial_swelling"
+  ]
+}

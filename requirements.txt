@@ -1,0 +1,22 @@
+# Core orchestration — the only hard requirement to run the real graph.
+langgraph>=1.0
+langgraph-checkpoint-sqlite
+
+# Free-tier hosted LLM providers (pick the ones you'll actually use — both
+# are optional if MEDASSIST_MOCK=1).
+groq
+google-generativeai
+
+# CPU-only embeddings + reranker (all-MiniLM-L6-v2 / ms-marco-MiniLM-L-6-v2).
+# This pulls in torch (CPU build) — expect a several-hundred-MB download the
+# first time. Nothing here needs a GPU.
+sentence-transformers
+
+# Already used by config.py for .env loading.
+python-dotenv
+
+streamlit>=1.50
+pandas
+# Only needed if you swap the toy in-memory retriever for a real FAISS index
+# as your knowledge base grows past a few dozen documents.
+# faiss-cpu
